@@ -26,6 +26,12 @@
                 <input type="password" name="password" id="password" required class="mt-2 p-2 w-full border border-gray-300 rounded-md">
             </div>
 
+            <!-- 2FA Code -->
+            <div class="mb-4">
+                <label for="2fa_code" class="block text-sm font-medium text-gray-700">Código 2FA</label>
+                <input type="text" name="2fa_code" id="2fa_code" required class="mt-2 p-2 w-full border border-gray-300 rounded-md" placeholder="123456">
+            </div>
+
             <!-- Submit Button -->
             <div class="mb-4">
                 <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">Iniciar sesión</button>
