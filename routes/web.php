@@ -21,9 +21,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::get('/welcome', function () {
-    return view('welcome');
-})->middleware('auth');  
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('auth'); 
+Route::get('/welcome', function () {  return view('welcome');})->middleware('auth');  
+Route::get('/', function () {return view('welcome');})->middleware('auth'); 
+

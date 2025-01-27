@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configurar 2FA</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ asset('js/2facountdown.js') }}" defer></script>
+
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
@@ -24,6 +26,10 @@
         <div class="bg-gray-100 text-center p-2 mt-2 text-gray-900 rounded-md">
             <code>{{ $secretKey }}</code>
         </div>
+
+        <p class="mt-4 text-sm text-gray-600 text-center">
+            Esta página se redirigirá automáticamente en <span id="timer">20</span> segundos.
+        </p>
 
         <p class="mt-4 text-sm text-gray-600 text-center">
             Una vez configurado, utiliza la aplicación para generar códigos cada vez que inicies sesión.
