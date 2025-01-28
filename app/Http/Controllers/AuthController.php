@@ -37,13 +37,13 @@ class AuthController extends Controller
                 $google2fa = new Google2FA();
 
                 if (!$google2fa->verifyKey($user->google2fa_secret, $request->input('2fa_code'))) {
-                    Auth::logout(); // Cerrar sesión si falla el 2FA
+                    Auth::logout(); 
                     return back()->withErrors(['2fa_code' => 'El código 2FA es inválido.']);
                 }
             }
 
             session(['2fa_authenticated' => true]);
-            return redirect()->route('welcome'); // Usar nombre de la ruta
+            return redirect()->route('welcome'); 
         }
 
         return back()->withErrors(['email' => 'Algo ha ocurrido!']);
@@ -52,7 +52,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login'); // Usar nombre de la ruta
+        return redirect()->route('login'); 
     }
 
     public function showRegisterForm(Request $request)
@@ -107,6 +107,6 @@ class AuthController extends Controller
             $user->delete();
         }
 
-        return redirect()->route('register', ['error' => '2fa_invalid']); // Usar nombre de la ruta
+        return redirect()->route('register', ['error' => '2fa_invalid']); 
     }
 }

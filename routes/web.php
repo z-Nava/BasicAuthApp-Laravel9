@@ -28,7 +28,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/invalidate-2fa', 'invalidate2FA')->name('invalidate.2fa');
 });
 
-// Rutas protegidas con middleware de autenticación
+
 Route::middleware('auth')->group(function () {
     Route::get('/welcome', function () {
         return view('welcome');
