@@ -1,20 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
-    let countdown = 20; // 20 segundos
+    let countdown = 20; // Segundos para el temporizador
     const timerElement = document.getElementById('timer');
+    const progressBar = document.getElementById('progress-bar');
 
-    // Obtén el ID del usuario desde un atributo data (enviado desde el backend)
-    const userId = document.body.getAttribute('data-user-id');
-
-    // Actualiza el contador cada segundo
+    // Actualizar el temporizador cada segundo
     const interval = setInterval(() => {
         countdown--;
         timerElement.innerText = countdown;
 
-        // Cuando el contador llega a 0, envía la solicitud para invalidar el usuario
+        // Reducir la barra de progreso
+        if (progressBar) {
+            progressBar.style.width = `${(countdown / 20) * 100}%`;
+        }
+
+        // Redirigir al expirar el temporizador
         if (countdown <= 0) {
             clearInterval(interval);
 
-            // Enviar solicitud POST para invalidar al usuario
+            // Enviar solicitud para invalidar el usuario
+            const userId = document.body.getAttribute('data-user-id');
             fetch('/invalidate-2fa', {
                 method: 'POST',
                 headers: {

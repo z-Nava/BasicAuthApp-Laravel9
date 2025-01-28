@@ -29,6 +29,9 @@
             <code>{{ $secretKey }}</code>
         </div>
 
+        <div class="relative w-full bg-gray-200 h-2 rounded mt-4">
+            <div id="progress-bar" class="absolute bg-blue-500 h-2 rounded transition-all duration-1000" style="width: 100%;"></div>
+        </div>
         <p class="mt-4 text-sm text-gray-600 text-center">
             Esta página se redirigirá automáticamente en <span id="timer">20</span> segundos.
         </p>
