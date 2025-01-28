@@ -20,11 +20,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
     Route::post('/logout', 'logout')->name('logout');
 
-  
     Route::get('/register', 'showRegisterForm')->name('register');
     Route::post('/register', 'register');
 
-   
     Route::post('/invalidate-2fa', 'invalidate2FA')->name('invalidate.2fa');
 });
 
