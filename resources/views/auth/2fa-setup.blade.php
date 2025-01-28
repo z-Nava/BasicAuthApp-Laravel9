@@ -35,6 +35,9 @@
         <p class="mt-4 text-sm text-gray-600 text-center">
             Esta página se redirigirá automáticamente en <span id="timer">20</span> segundos.
         </p>
+        <p class="mt-4 text-sm text-gray-600 text-center">
+            Por favor, da click en <b>"Iniciar Sesion"</b> para completar el proceso, de no ser asi, se invalidara tu registro...
+        </p>
 
         <p class="mt-4 text-sm text-gray-600 text-center">
             Una vez configurado, utiliza la aplicación para generar códigos cada vez que inicies sesión.
