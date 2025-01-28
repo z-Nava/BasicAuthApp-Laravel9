@@ -13,14 +13,30 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+// Rutas de autenticación
+Route::controller(AuthController::class)->group(function () {
+    
+    Route::get('/login', 'showLoginForm')->name('login');
+    Route::post('/login', 'login');
+    Route::post('/logout', 'logout')->name('logout');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+  
+    Route::get('/register', 'showRegisterForm')->name('register');
+    Route::post('/register', 'register');
 
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
+   
+    Route::post('/invalidate-2fa', 'invalidate2FA')->name('invalidate.2fa');
+});
 
-Route::get('/welcome', function () {  return view('welcome');})->middleware('auth');  
-Route::get('/', function () {return view('welcome');})->middleware('auth'); 
+// Rutas protegidas con middleware de autenticación
+Route::middleware('auth')->group(function () {
+    Route::get('/welcome', function () {
+        return view('welcome');
+    })->name('welcome');
+
+    Route::get('/', function () {
+        return view('welcome');
+    });
+});
+
 

@@ -11,7 +11,7 @@
     <div class="bg-white p-8 rounded-lg shadow-lg w-96">
         <h1 class="text-2xl font-bold text-center mb-6">Iniciar sesión</h1>
 
-        <form action="{{ url('/login') }}" method="POST">
+        <form action="{{ route('login') }}" method="POST">
             @csrf
 
             <!-- Email -->

@@ -6,9 +6,11 @@
     <title>Configurar 2FA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="{{ asset('js/2facountdown.js') }}" defer></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen" data-user-id="{{ $userId }}">
+
 
     <div class="bg-white p-8 rounded-lg shadow-lg w-96">
         <h1 class="text-2xl font-bold text-center mb-6">Configura tu autenticación en dos pasos</h1>

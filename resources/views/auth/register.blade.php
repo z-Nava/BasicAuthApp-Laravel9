@@ -10,8 +10,13 @@
 
     <div class="bg-white p-8 rounded-lg shadow-lg w-96">
         <h1 class="text-2xl font-bold text-center mb-6">Registrarse</h1>
-
-        <form action="{{ url('/register') }}" method="POST">
+        <!-- Mostrar mensaje de error si existe -->
+        @if(isset($errorMessage))
+        <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+            {{ $errorMessage }}
+        </div>
+        @endif
+        <form action="{{ route('register') }}" method="POST">
             @csrf
 
             <!-- Name -->
