@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use PragmaRX\Google2FA\Google2FA;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 
 //composer require pragmarx/google2fa-laravel
 //php artisan vendor:publish --provider="PragmaRX\Google2FALaravel\ServiceProvider"
@@ -22,14 +24,8 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-            '2fa_code' => 'required|digits:6',
-        ]);
-
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
 
@@ -64,14 +60,8 @@ class AuthController extends Controller
         return view('auth.register', ['errorMessage' => $errorMessage]);
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:50',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
