@@ -16,31 +16,31 @@
             {{ $errorMessage }}
         </div>
         @endif
-        <form action="{{ route('register') }}" method="POST">
+                <form action="{{ route('register') }}" method="POST">
             @csrf
 
             <!-- Name -->
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
-                <input type="text" name="name" id="name" required class="mt-2 p-2 w-full border border-gray-300 rounded-md" value="{{ old('name') }}">
+                <input type="text" name="name" id="name" required class="mt-2 p-2 w-full border border-gray-300 rounded-md" value="{{ old('name') }}" pattern="[A-Za-z\s]+" title="El nombre solo puede contener letras y espacios">
             </div>
 
             <!-- Email -->
             <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
-                <input type="email" name="email" id="email" required class="mt-2 p-2 w-full border border-gray-300 rounded-md" value="{{ old('email') }}">
+                <input type="email" name="email" id="email" required class="mt-2 p-2 w-full border border-gray-300 rounded-md" value="{{ old('email') }}" minlength="5">
             </div>
 
             <!-- Password -->
             <div class="mb-4">
                 <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                <input type="password" name="password" id="password" required class="mt-2 p-2 w-full border border-gray-300 rounded-md">
+                <input type="password" name="password" id="password" required class="mt-2 p-2 w-full border border-gray-300 rounded-md" minlength="8" pattern=".*[A-Z].*" title="La contraseña debe contener al menos una letra mayúscula, una minúscula, un número y un carácter especial">
             </div>
 
             <!-- Confirm Password -->
             <div class="mb-4">
                 <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
-                <input type="password" name="password_confirmation" id="password_confirmation" required class="mt-2 p-2 w-full border border-gray-300 rounded-md">
+                <input type="password" name="password_confirmation" id="password_confirmation" required class="mt-2 p-2 w-full border border-gray-300 rounded-md" minlength="8">
             </div>
 
             <!-- Submit Button -->
@@ -63,6 +63,7 @@
                 </div>
             @endif
         </form>
+
     </div>
 
 </body>
