@@ -47,6 +47,7 @@
                 {!! HCaptcha::renderJs() !!}
                 {!! HCaptcha::display() !!}
             </div>  
+            
             <!-- Submit Button -->
             <div class="mb-4">
                 <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600">Registrar</button>

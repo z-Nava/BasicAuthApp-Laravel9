@@ -27,6 +27,7 @@ class LoginRequest extends FormRequest
             'email' => 'required|email|exists:users,email',
             'password' => 'required|min:8',  
             '2fa_code' => 'required|digits:6',
+            'h-captcha-response' => ['required'],
         ];
     }
 
@@ -40,6 +41,7 @@ class LoginRequest extends FormRequest
             'password.min' => __('Your password must have at least 8 characters'),
             '2fa_code.required' => __('The 2FA code are required'),
             '2fa_code.digits' => __('The 2FA code must have at least 6 digits'),
+            'h-captcha-response_required' => __('Please complete the captcha'),
         ];      
     }
 }

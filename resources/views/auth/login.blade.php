@@ -32,6 +32,11 @@
             <input type="text" name="2fa_code" id="2fa_code" required class="mt-2 p-2 w-full border border-gray-300 rounded-md" placeholder="123456" pattern="\d{6}" title="El código debe ser de 6 dígitos">
         </div>
 
+        <div class="mb-4 grid place-content-center">
+            {!! HCaptcha::renderJs() !!}
+            {!! HCaptcha::display() !!}
+        </div>  
+        
         <!-- Submit Button -->
         <div class="mb-4">
             <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">Iniciar sesión</button>
