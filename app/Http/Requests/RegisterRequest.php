@@ -27,6 +27,7 @@ class RegisterRequest extends FormRequest
             'name' => 'required|string|max:50|regex:/^[a-zA-Z\s]+$/',  
             'email' => 'required|email|unique:users,email|regex:/^((?!example.com).)*$/', 
             'password' => 'required|min:8|confirmed|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/|regex:/[\W_]/',  
+            'h-captcha-response' => ['required'],
         ];
     }
 
@@ -43,6 +44,7 @@ class RegisterRequest extends FormRequest
             'password_min' => 'Your password must have at least 8 characters',
             'password_confirmed' => 'Password confirmation does not match',
             'password_complexity' => 'Your password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
+            'h-captcha-response_required' => 'Please complete the captcha',
         ];               
     }
 }

@@ -43,6 +43,10 @@
                 <input type="password" name="password_confirmation" id="password_confirmation" required class="mt-2 p-2 w-full border border-gray-300 rounded-md" minlength="8">
             </div>
 
+            <div class="mb-4 grid place-content-center">
+                {!! HCaptcha::renderJs() !!}
+                {!! HCaptcha::display() !!}
+            </div>  
             <!-- Submit Button -->
             <div class="mb-4">
                 <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600">Registrar</button>
