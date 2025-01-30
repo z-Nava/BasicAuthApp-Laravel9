@@ -13,13 +13,6 @@ use App\Services\LoginService;
 use App\Services\RegisterService;
 use App\Services\TwoFactorService;
 
-//composer require pragmarx/google2fa-laravel
-//php artisan vendor:publish --provider="PragmaRX\Google2FALaravel\ServiceProvider"
-//$table->string('google2fa_secret')->nullable();
-//php artisan migrate:fresh
-//composer require simplesoftwareio/simple-qrcode
-//extension=gd
-
 class AuthController extends Controller
 {   
     /**
@@ -56,7 +49,6 @@ class AuthController extends Controller
         return view('auth.register', ['errorMessage' => $errorMessage]);
     }
 
-    
     // Iniciar sesión
     public function login(LoginRequest $request)
     {
@@ -78,8 +70,6 @@ class AuthController extends Controller
         // Redirigir al formulario de inicio de sesión
         return redirect()->route('login');
     }
-
-    
 
     // Registrar usuario
     public function register(RegisterRequest $request)
