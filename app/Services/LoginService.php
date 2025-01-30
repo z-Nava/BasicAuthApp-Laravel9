@@ -4,39 +4,44 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 use PragmaRX\Google2FA\Google2FA;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class LoginService
 {
-/**
- * Servicio para autenticar a un usuario con 2FA.
-*/
+    /**
+     * Servicio para autenticar a un usuario con 2FA.
+    */
     public function authenticate($request)
     {
-        //Autenticar al usuario
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::user();
+        // Buscar el usuario por email
+        $user = User::where('email', $request->email)->first();
 
-            //Verificar si el usuario tiene 2FA habilitado
-            if ($user->google2fa_secret) {
-                $google2fa = new Google2FA();
-            //Verificar si el código 2FA es válido
-                if (!$google2fa->verifyKey($user->google2fa_secret, $request->input('2fa_code'))) {
-                    Auth::logout();
-                    //Devolver un error si el código 2FA es inválido
-                    return [
-                        'status' => 'error',
-                        'errors' => ['2fa_code' => 'El código 2FA es inválido.']
-                    ];
-                }
-            }
-            //Establecer la sesión de autenticación
-            session(['2fa_authenticated' => true]);
-            return ['status' => 'success'];
+        // Verificar si el usuario existe y la contraseña es correcta
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return [
+                'status' => 'error',
+                'errors' => ['email' => 'Las credenciales no son válidas.']
+            ];
         }
 
-        return [
-            'status' => 'error',
-            'errors' => ['email' => 'Algo ha ocurrido!']
-        ];
+        // Verificar si el usuario tiene 2FA habilitado
+        if ($user->google2fa_secret) {
+            $google2fa = new Google2FA();
+            if (!$google2fa->verifyKey($user->google2fa_secret, $request->input('2fa_code'))) {
+                return [
+                    'status' => 'error',
+                    'errors' => ['2fa_code' => 'El código 2FA es inválido.']
+                ];
+            }
+        }
+
+        // 🚀 Regenerar la sesión solo después de validar credenciales y 2FA
+        session()->regenerate();
+
+        // Iniciar sesión manualmente
+        Auth::login($user);
+
+        return ['status' => 'success'];
     }
 }
