@@ -37,7 +37,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name_required' => 'El nombre es requerido',
-            'name_invalid' => 'The name can only contain letters and spaces El nombre solo puede contener letras y espacios',
+            'name_invalid' => 'El nombre solo puede contener letras y espacios',
             'email_required' => 'El correo es requerido',
             'email_invalid' => 'El formato del correo es invalido',
             'email_unique' => 'Este correo ya fue registrado',
