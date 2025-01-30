@@ -36,17 +36,17 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name_required' => 'The name is required',
-            'name_invalid' => 'The name can only contain letters and spaces',
-            'email_required' => 'The email is required',
-            'email_invalid' => 'The email format is invalid',
-            'email_unique' => 'This email is already registered',
-            'email_domain_invalid' => 'The email domain is not allowed',
-            'password_required' => 'Password is required',
-            'password_min' => 'Your password must have at least 8 characters',
-            'password_confirmed' => 'Password confirmation does not match',
-            'password_complexity' => 'Your password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
-            'h-captcha-response_required' => 'Please complete the captcha',
+            'name_required' => 'El nombre es requerido',
+            'name_invalid' => 'The name can only contain letters and spaces El nombre solo puede contener letras y espacios',
+            'email_required' => 'El correo es requerido',
+            'email_invalid' => 'El formato del correo es invalido',
+            'email_unique' => 'Este correo ya fue registrado',
+            'email_domain_invalid' => 'El dominio del correo es invalido',
+            'password_required' => 'La contraseña es requerida',
+            'password_min' => 'Tu contraseña debe tener al menos 8 caracteres',
+            'password_confirmed' => 'Tu confirmacion de contraseña no coincide',
+            'password_complexity' => 'Tu contraseña debe contener una letra mayuscula, una letra miniscula, un numero y un caracter especial.',
+            'h-captcha-response_required' => 'Por favor completa el captcha',
         ];               
     }
 }

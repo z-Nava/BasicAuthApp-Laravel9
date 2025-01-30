@@ -35,14 +35,14 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => __('The email is required'),
-            'email.email' => __('The email is invalid'),
-            'email.exists' => __('The email is not found'),  
-            'password.required' => __('Password is required to complete the process'),
-            'password.min' => __('Your password must have at least 8 characters'),
-            '2fa_code.required' => __('The 2FA code are required'),
-            '2fa_code.digits' => __('The 2FA code must have at least 6 digits'),
-            'h-captcha-response_required' => __('Please complete the captcha'),
+            'email.required' => __('El email es requerido'),
+            'email.email' => __('El email es invalido'),
+            'email.exists' => __('El email no existe'),  
+            'password.required' => __('Tu contraseña es requerida para completar el proceso'),
+            'password.min' => __('Tu contraseña debe tener al menos 8 caracteres'),
+            '2fa_code.required' => __('Tu codigo 2FA es requerido'),
+            '2fa_code.digits' => __('Tu codigo 2FA debe tener 6 digitos'),
+            'h-captcha-response_required' => __('Por favor completa el captcha'),
         ];      
     }
 }
