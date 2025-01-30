@@ -21,74 +21,72 @@ use App\Services\TwoFactorService;
 //extension=gd
 
 class AuthController extends Controller
-{
-    protected $loginService;
-    protected $registerService;
-    protected $twoFactorService;
+{   
+    /**
+     * Controlador de autenticación de usuario
+     *
+     * 
+     */
+    protected $loginService; // Servicio de autenticación
+    protected $registerService; // Servicio de registro
+    protected $twoFactorService; // Servicio de autenticación de dos factores
 
     public function __construct(LoginService $loginService, RegisterService $registerService, TwoFactorService $twoFactorService)
     {
+        // Inyectar servicios
         $this->loginService = $loginService;
         $this->registerService = $registerService;
         $this->twoFactorService = $twoFactorService;
     }
 
-    // === Vistas ===
-
-    /**
-     * Muestra el formulario de inicio de sesión.
-     */
+    // Mostrar el formulario de inicio de sesión
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    /**
-     * Muestra el formulario de registro.
-     */
+    // Mostrar el formulario de registro
     public function showRegisterForm(Request $request)
-    {
+    { 
+        // Mensaje de error personalizado
         $errorMessage = $request->query('error') === '2fa_invalid'
             ? 'La confirmación de 2FA fue inválida. Por favor, regístrate nuevamente.'
             : null;
-
+        // Mostrar el formulario de registro
         return view('auth.register', ['errorMessage' => $errorMessage]);
     }
 
-    // === Autenticación ===
-
-    /**
-     * Maneja el inicio de sesión del usuario.
-     */
+    
+    // Iniciar sesión
     public function login(LoginRequest $request)
     {
+        // Autenticar usuario
         $result = $this->loginService->authenticate($request);
-
+        // Verificar si la autenticación fue exitosa
         if ($result['status'] === 'success') {
             return redirect()->route('welcome');
         }
-
+        // Mostrar errores de autenticación
         return back()->withErrors($result['errors']);
     }
 
-    /**
-     * Cierra la sesión del usuario.
-     */
+    // Cerrar sesión
     public function logout()
     {
+        // Cerrar sesión
         Auth::logout();
+        // Redirigir al formulario de inicio de sesión
         return redirect()->route('login');
     }
 
-    // === Registro ===
+    
 
-    /**
-     * Maneja el registro de un nuevo usuario.
-     */
+    // Registrar usuario
     public function register(RegisterRequest $request)
     {
+        // Registrar usuario
         $data = $this->registerService->registerUser($request);
-
+        // Verificar si el registro fue exitoso
         return view('auth.2fa-setup', [
             'qrCode' => $data['qrCode'],
             'secretKey' => $data['secretKey'],
@@ -96,15 +94,12 @@ class AuthController extends Controller
         ]);
     }
 
-    // === 2FA ===
-
-    /**
-     * Invalida la configuración de 2FA si no se completó.
-     */
+    // Verificar el código de autenticación de dos factores
     public function invalidate2FA(Request $request)
     {
+        // Invalidar el código de autenticación de dos factores
         $this->twoFactorService->invalidate($request->input('user_id'));
-
+        // Redirigir al formulario de registro con un mensaje de error
         return redirect()->route('register', ['error' => '2fa_invalid']);
     }
 }

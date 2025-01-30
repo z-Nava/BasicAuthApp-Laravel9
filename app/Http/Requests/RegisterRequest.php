@@ -21,6 +21,8 @@ class RegisterRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
+
+     // Reglas de validación para el formulario de registro
     public function rules()
     {
         return [
@@ -30,7 +32,7 @@ class RegisterRequest extends FormRequest
             'h-captcha-response' => ['required'],
         ];
     }
-
+    // Mensajes personalizados para las validaciones del formulario de registro
     public function messages()
     {
         return [

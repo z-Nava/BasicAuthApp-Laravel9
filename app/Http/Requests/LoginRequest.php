@@ -21,6 +21,7 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
+    // Reglas de validación para el formulario de inicio de sesión
     public function rules()
     {
         return [
@@ -30,7 +31,7 @@ class LoginRequest extends FormRequest
             'h-captcha-response' => ['required'],
         ];
     }
-
+    // Mensajes personalizados para las validaciones
     public function messages()
     {
         return [
