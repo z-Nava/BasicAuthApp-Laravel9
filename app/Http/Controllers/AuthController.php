@@ -62,9 +62,23 @@ class AuthController extends Controller
         $result = $this->loginService->authenticate($request);
         // Verificar si la autenticación fue exitosa
         if ($result['status'] === 'success') {
-            return redirect()->route('welcome');
+            return redirect()->route('auth.2fa-verify');
         }
         // Mostrar errores de autenticación
+        return back()->withErrors($result['errors']);
+    }
+
+    public function verify2FA(Request $request)
+    {
+        // Verificar el código de autenticación de dos factores
+        $result = $this->twoFactorService->verify(Auth::user(), $request);
+        
+        // Verificar si la autenticación de dos factores fue exitosa
+        if ($result['status'] === 'success') {
+            return redirect()->route('welcome');
+        }
+        
+        // Mostrar errores de autenticación de dos factores
         return back()->withErrors($result['errors']);
     }
 

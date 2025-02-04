@@ -24,24 +24,7 @@ class LoginService
                 'errors' => ['email' => 'Las credenciales no son válidas.']
             ];
         }
-
-        // Verificar si el usuario tiene 2FA habilitado
-        if ($user->google2fa_secret) {
-            $google2fa = new Google2FA();
-            if (!$google2fa->verifyKey($user->google2fa_secret, $request->input('2fa_code'))) {
-                return [
-                    'status' => 'error',
-                    'errors' => ['2fa_code' => 'El código 2FA es inválido.']
-                ];
-            }
-        }
-
-        // 🚀 Regenerar la sesión solo después de validar credenciales y 2FA
-        session()->regenerate();
-
-        // Iniciar sesión manualmente
-        Auth::login($user);
-
+        
         return ['status' => 'success'];
     }
 }
