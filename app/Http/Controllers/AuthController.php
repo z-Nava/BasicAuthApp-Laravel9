@@ -38,6 +38,12 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    public function show2FAVerifyForm(Request $request)
+    {
+        // Mostrar el formulario de verificación de 2FA
+        return view('auth.2fa-verify');
+    }
+
     // Mostrar el formulario de registro
     public function showRegisterForm(Request $request)
     { 
