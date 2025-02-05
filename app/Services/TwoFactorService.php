@@ -24,7 +24,7 @@ class TwoFactorService
     {
         // Buscar al usuario
         $user = User::find($userId);
-        
+
         // Eliminar al usuario si no está verificado
         if ($user && !$user->google2fa_verified) {
             // Eliminar al usuario
@@ -63,5 +63,4 @@ class TwoFactorService
 
         return ['status' => 'success'];
     }
-    
 }

@@ -11,7 +11,7 @@ class LoginService
 {
     /**
      * Servicio para autenticar a un usuario con 2FA.
-    */
+     */
     public function authenticate($request)
     {
         // Buscar el usuario por email
@@ -24,7 +24,7 @@ class LoginService
                 'errors' => ['email' => 'Las credenciales no son válidas.']
             ];
         }
-        
+
         return ['status' => 'success', 'user' => $user];
     }
 }

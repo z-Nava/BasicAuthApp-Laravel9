@@ -15,7 +15,7 @@ use App\Services\TwoFactorService;
 use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
-{   
+{
     /**
      * Controlador de autenticación de usuario
      *
@@ -47,7 +47,7 @@ class AuthController extends Controller
 
     // Mostrar el formulario de registro
     public function showRegisterForm(Request $request)
-    { 
+    {
         // Mensaje de error personalizado
         $errorMessage = $request->query('error') === '2fa_invalid'
             ? 'La confirmación de 2FA fue inválida. Por favor, regístrate nuevamente.'
@@ -76,23 +76,23 @@ class AuthController extends Controller
     }
 
     public function verify2FA(Request $request)
-    {    
+    {
         $user = session('user'); // Recuperar al usuario de la sesión
-      
+
         if (!$user) {
             return redirect()->route('login')->withErrors(['user' => 'Usuario no encontrado.']);
         }
-     
+
         // Verificar el código de autenticación de dos factores
         $result = $this->twoFactorService->verify($user, $request);
         // Verificar si la autenticación de 2FA fue exitosa
-        if ($result['status'] === 'success') { 
+        if ($result['status'] === 'success') {
             // Aquí es donde debes autenticar al usuario
             Auth::login($user);
             // Redirigir a la página de bienvenida
             return redirect()->route('welcome');
         }
-        
+
         return back()->withErrors($result['errors']);
     }
 
