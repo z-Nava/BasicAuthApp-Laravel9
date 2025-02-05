@@ -25,6 +25,6 @@ class LoginService
             ];
         }
         
-        return ['status' => 'success'];
+        return ['status' => 'success', 'user' => $user];
     }
 }
