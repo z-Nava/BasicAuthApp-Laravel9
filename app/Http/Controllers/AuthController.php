@@ -12,9 +12,10 @@ use App\Http\Requests\RegisterRequest;
 use App\Services\LoginService;
 use App\Services\RegisterService;
 use App\Services\TwoFactorService;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
-{   
+{
     /**
      * Controlador de autenticación de usuario
      *
@@ -39,9 +40,15 @@ class AuthController extends Controller
         return view('auth.login', compact('serverName'));
     }
 
+    public function show2FAVerifyForm()
+    {
+        // Mostrar el formulario de verificación de 2FA
+        return view('auth.2fa-verify');
+    }
+
     // Mostrar el formulario de registro
     public function showRegisterForm(Request $request)
-    { 
+    {
         // Mensaje de error personalizado
         $errorMessage = $request->query('error') === '2fa_invalid'
             ? 'La confirmación de 2FA fue inválida. Por favor, regístrate nuevamente.'
@@ -55,14 +62,41 @@ class AuthController extends Controller
     {
         // Autenticar usuario
         $result = $this->loginService->authenticate($request);
+
         // Verificar si la autenticación fue exitosa
         if ($result['status'] === 'success') {
-            return redirect()->route('welcome');
+            // Guardar al usuario en la sesión
+            session(['user' => $result['user']]);
+
+            // Redirigir a la vista de 2FA para ingresar el código
+            return redirect()->route('auth.2fa-verify');
         }
 
         // Mostrar errores de autenticación
         return back()->withErrors($result['errors']);
     }
+
+    public function verify2FA(Request $request)
+    {
+        $user = session('user'); // Recuperar al usuario de la sesión
+
+        if (!$user) {
+            return redirect()->route('login')->withErrors(['user' => 'Usuario no encontrado.']);
+        }
+
+        // Verificar el código de autenticación de dos factores
+        $result = $this->twoFactorService->verify($user, $request);
+        // Verificar si la autenticación de 2FA fue exitosa
+        if ($result['status'] === 'success') {
+            // Aquí es donde debes autenticar al usuario
+            Auth::login($user);
+            // Redirigir a la página de bienvenida
+            return redirect()->route('welcome');
+        }
+
+        return back()->withErrors($result['errors']);
+    }
+
 
     // Cerrar sesión
     public function logout()

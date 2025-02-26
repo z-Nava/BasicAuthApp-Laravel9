@@ -23,6 +23,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/register', 'showRegisterForm')->name('register');
     Route::post('/register', 'register');
     // Ruta de invalidación de 2FA
+    Route::get('/2fa-verify', 'show2FAVerifyForm')->name('auth.2fa-verify');
+    Route::post('/2fa-verify', 'verify2FA')->name('verify.2fa');
     Route::post('/invalidate-2fa', 'invalidate2FA')->name('invalidate.2fa');
 });
 

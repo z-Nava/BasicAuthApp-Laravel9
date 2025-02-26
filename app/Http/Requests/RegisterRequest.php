@@ -22,13 +22,13 @@ class RegisterRequest extends FormRequest
      * @return array<string, mixed>
      */
 
-     // Reglas de validación para el formulario de registro
+    // Reglas de validación para el formulario de registro
     public function rules()
     {
         return [
-            'name' => 'required|string|max:50|regex:/^[a-zA-Z\s]+$/',  
-            'email' => 'required|email|unique:users,email|regex:/^((?!example.com).)*$/', 
-            'password' => 'required|min:8|confirmed|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/|regex:/[\W_]/',  
+            'name' => 'required|string|max:50|regex:/^[a-zA-Z\s]+$/',
+            'email' => 'required|email|unique:users,email|regex:/^((?!example.com).)*$/',
+            'password' => 'required|min:8|confirmed|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/|regex:/[\W_]/',
             'h-captcha-response' => ['required'],
         ];
     }
@@ -47,6 +47,6 @@ class RegisterRequest extends FormRequest
             'password_confirmed' => 'Tu confirmacion de contraseña no coincide',
             'password_complexity' => 'Tu contraseña debe contener una letra mayuscula, una letra miniscula, un numero y un caracter especial.',
             'h-captcha-response_required' => 'Por favor completa el captcha',
-        ];               
+        ];
     }
 }
