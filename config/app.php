@@ -16,6 +16,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'server_port' => $_SERVER['SERVER_PORT'] ?? null,
 
     /*
     |--------------------------------------------------------------------------

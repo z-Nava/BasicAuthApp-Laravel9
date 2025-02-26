@@ -35,7 +35,8 @@ class AuthController extends Controller
     // Mostrar el formulario de inicio de sesión
     public function showLoginForm()
     {
-        return view('auth.login');
+        $serverName = request()->server('SERVER_PORT') == 8001 ? 'Servidor 1' : 'Servidor 2';
+        return view('auth.login', compact('serverName'));
     }
 
     // Mostrar el formulario de registro
@@ -58,6 +59,7 @@ class AuthController extends Controller
         if ($result['status'] === 'success') {
             return redirect()->route('welcome');
         }
+
         // Mostrar errores de autenticación
         return back()->withErrors($result['errors']);
     }

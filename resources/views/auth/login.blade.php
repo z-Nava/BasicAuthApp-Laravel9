@@ -10,7 +10,7 @@
 
     <div class="bg-white p-8 rounded-lg shadow-lg w-96">
         <h1 class="text-2xl font-bold text-center mb-6">Iniciar sesión</h1>
-
+        <p> Estas en el servidor: {{$serverName}}</p>
             <form action="{{ route('login') }}" method="POST">
         @csrf
 
